@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color-guessing-game</title>
+</head>
+
+<body>
+    <h1>Content Game Game</h1>
+    <button type="button" onClick="runGame()">Start Game</button>
+
+
+    <script>
+        //possible solutions
+        const COLORS_ARRAY = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow']
+
+        function runGame() {
+            let guess = ''
+            let correct = false
+
+            const targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length) //tie index to array
+
+            const target = COLORS_ARRAY[targetIndex]
+            console.log('the correct answer is:', target)
+            do {
+                guess = prompt(' I am thinking of one of these colors: \n\n' + COLORS_ARRAY.join(', ') + '\n\n What color am I thinking of?\n')
+                if (guess === null) {
+                    alert('You are no fun')
+                    return
+                }
+                correct = checkGuess(guess, target)
+            } while (!correct) // continus while guess has not been correct
+
+            alert('You won!!')
+        }
+
+        function checkGuess(guess, target) {
+            let correct = false
+            if (!COLORS_ARRAY.includes(guess)) {
+                alert('Your guess is not an option')
+            } else if (guess < target) {
+                alert('Guess is alphabetically lower than target')
+            } else if (guess > target) {
+                alert('Guess is alphabetically higher than target')
+            } else {
+                console.log('this is the end clause')
+                correct = true
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
